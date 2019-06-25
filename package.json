@@ -11,7 +11,10 @@
   },
   "dependencies": {
     "express": "^4.15.2",
-    "twilio": "^3.31.0"
+    "twilio": "^3.31.0",
+    "request": "2.88.0",
+    "url": "0.11.0",
+    "path": "0.12.7",
   },
   "repository": {
     "type": "git",
