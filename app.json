@@ -1,0 +1,7 @@
+{
+    "name": "Sample Node Web Server Application",
+    "description": "This application is a sample application.",
+    "repository": "https://github.com/tigerfarm/tighttp",
+    "logo": "http://tigerfarmpress.com/images/topImgLeft.jpg",
+    "keywords": ["node", "express", "heroku"],
+}
