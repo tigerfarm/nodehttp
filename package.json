@@ -5,12 +5,13 @@
   "engines": {
     "node": "10.x"
   },
-  "main": "webserver.js",
+  "main": "echoserver.js",
   "scripts": {
-    "start": "node webserver.js"
+    "start": "node echoserver.js"
   },
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "http": "^0.0.0"
   },
   "repository": {
     "type": "git",

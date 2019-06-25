@@ -9,9 +9,43 @@
 //
 
 // -----------------------------------------------------------------------------
-// $ npm install express --save
+// $ npm install --save express
 const express = require('express');
 var app = express();
+
+// $ npm install --save request
+const request = require('request');
+const url = require("url");
+
+// -----------------------------------------------------------------------------
+// Echo the request.
+
+var theUrl = '';
+var theQueryJson = '';
+app.get('*', function (request, res, next) {
+    console.log("------------------");
+    console.log("+ HTTP headers:");
+    var theHeaders = JSON.stringify(request.headers).split('","');
+    for (var i = 0; i < theHeaders.length; i++) {
+        if (i === 0) {
+            console.log('++ ' + theHeaders[i].substring(1, theHeaders[i].length) + '"');
+        } else if (i === theHeaders.length - 1) {
+            console.log('++ "' + theHeaders[i] + '');
+        } else {
+            console.log('++ "' + theHeaders[i].substring(0, theHeaders[i].length - 1) + '"');
+        }
+    }
+    console.log("---");
+    theUrl = url.parse(request.url).pathname;
+    theQueryJson = url.parse(request.url).query;
+    var theQueryString = '';
+    if (theQueryJson !== null) {
+        theQueryString = " ? " + JSON.stringify(theQueryString);
+    }
+    var urlComponentMessage = '+ URL components : ' + request.method + ' ' + theUrl + theQueryString;
+    console.log(urlComponentMessage);
+    next();
+});
 
 // -----------------------------------------------------------------------------
 app.get('/hello', function (req, res) {
