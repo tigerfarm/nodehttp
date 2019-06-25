@@ -5,16 +5,12 @@
   "engines": {
     "node": "10.x"
   },
-  "main": "echoserver.js",
+  "main": "webserver.js",
   "scripts": {
-    "start": "node echoserver.js"
+    "start": "node webserver.js"
   },
   "dependencies": {
-    "express": "^4.15.2",
-    "twilio": "^3.31.0",
-    "request": "2.88.0",
-    "url": "0.11.0",
-    "path": "0.12.7"
+    "express": "^4.15.2"
   },
   "repository": {
     "type": "git",
