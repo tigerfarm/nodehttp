@@ -78,7 +78,8 @@ function parseValue(theType, theCommand) {
 }
 
 function syntaxSet() {
-    sayMessage("> set <host> <name>");
+    sayMessage("> set host <name>");
+    sayMessage("> set host http://localhost:8000/");
     sayMessage("+ Twilio test host: https://api.twilio.com:8443/");
     sayMessage("+ Other hosts: http://localhost:8000/ http://tigerfarmpress.com");
     sayMessage("> set debug <on|off>");
@@ -324,6 +325,7 @@ function requestPost(theUri, theUrl) {
     });
 }
 
+// http://mpedzi03.pythonanywhere.com/twilioapp/xmlfilesone)
 
 // -----------------------------------------------------------------------------
 doPrompt();

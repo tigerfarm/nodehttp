@@ -1,0 +1,4 @@
+# Ignore my specific files and directories:
+#
+/node_modules/
+#

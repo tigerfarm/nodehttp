@@ -12,7 +12,8 @@ request({
     method: "POST",
     headers: {
         "Authorization": basicAuth,
-        'content-type': 'application/x-www-form-urlencoded'
+        "content-type": "application/x-www-form-urlencoded",
+        "Chunked": "false"
     },
     url: theRequestUrl,
     formData: theFormData

@@ -18,6 +18,20 @@ const request = require('request');
 const url = require("url");
 
 // -----------------------------------------------------------------------------
+function runProgram(theCommand, response) {
+    const exec = require('child_process').exec;
+    exec(theCommand, (error, stdout, stderr) => {
+        theResponse = `${stdout}`;
+        // console.log('+ theResponse: ');
+        console.log(theResponse.substring(0, theResponse.length - 1));
+        if (error !== null) {
+            console.log(`exec error: ${error}`);
+        }
+        response.send(theResponse.substring(0, theResponse.length - 1));
+    });
+}
+
+// -----------------------------------------------------------------------------
 // Echo the request.
 
 var theUrl = '';
@@ -91,6 +105,17 @@ app.post('/show', function (req, res) {
     });
 
     res.send('show post.');
+});
+
+// -----------------------------------------------------------------------------
+app.get('/ls', function (req, res) {
+    runProgram('ls', res);
+});
+app.get('/time', function (req, res) {
+    runProgram('date', res);
+});
+app.get('/date', function (req, res) {
+    runProgram('date', res);
 });
 
 // -----------------------------------------------------------------------------
