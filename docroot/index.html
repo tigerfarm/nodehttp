@@ -5,7 +5,7 @@
         <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
         <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
         <script src="app.js"></script>
-        <link rel="stylesheet" href="client.css">
+        <link rel="stylesheet" href="app.css">
         <script>
             function clearMessages() {
                 var clientId = $("#clientid").val();
@@ -49,6 +49,7 @@
                         <td><button class="abutton" id="btn-trtoken" onclick="trToken();" style="visibility: visible;">Get access token</button></td>
                         <td><button class="abutton" id="btn-online" onclick="goAvailable();" disabled style="visibility: visible;">Go online</button></td>
                         <td><button class="abutton" id="btn-offline" onclick="goOffline();" disabled style="visibility: visible;">Go offline</button></td>
+                        <td><button class="abutton" id="btn-nodesayhello" onclick="nodeSayHello();" disabled style="visibility: visible;">Run nodejs program</button></td>
                         <td><button class="abutton" id="btn-phpsayhello" onclick="phpSayHello();" disabled style="visibility: visible;">Run PHP program</button></td>
                     </tr>
                     <tr>
