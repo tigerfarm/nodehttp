@@ -22,7 +22,7 @@ var path = require("path");
 
 function runPhpProgram(theProgramName, theParameters, response) {
     console.log("+ Run: " + theProgramName + theParameters);
-    const theProgram = '/app/php ' + path.join(process.cwd(), theProgramName) + theParameters;
+    const theProgram = '/app/.heroku/php/bin/php ' + path.join(process.cwd(), theProgramName) + theParameters;
     const exec = require('child_process').exec;
     exec(theProgram, (error, stdout, stderr) => {
         theResponse = `${stdout}`;
