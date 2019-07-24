@@ -14,7 +14,18 @@ function setActivityStatus(workerActivity) {
 
 // -----------------------------------------------------------------------------
 
-function phpSayHello(workerActivity) {
+function nodeSayHello() {
+    logger("Run the PHP program: sayhello.php");
+    $.get("sayhello.js", function (theResponse) {
+        logger("The response: " + theResponse);
+    })
+            .fail(function () {
+                logger("- Error refreshing the token.");
+                return;
+            });
+}
+
+function phpSayHello() {
     logger("Run the PHP program: sayhello.php");
     $.get("sayhello.php", function (theResponse) {
         logger("The response: " + theResponse);
@@ -73,6 +84,7 @@ function setTrButtons(workerActivity) {
         case "init":
             $('#btn-online').prop('disabled', true);
             $('#btn-offline').prop('disabled', true);
+            $('#btn-nodesayhello').prop('disabled', false);
             $('#btn-phpsayhello').prop('disabled', false);
             break;
         case "Available":

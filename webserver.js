@@ -22,7 +22,7 @@ var path = require("path");
 
 function runPhpProgram(theProgramName, theParameters, response) {
     console.log("+ Run: " + theProgramName + theParameters);
-    const theProgram = './.heroku/php/bin/php ' + path.join(process.cwd(), theProgramName) + theParameters;
+    const theProgram = '/app/.heroku/php/bin/php ' + path.join(process.cwd(), theProgramName) + theParameters;
     const exec = require('child_process').exec;
     exec(theProgram, (error, stdout, stderr) => {
         theResponse = `${stdout}`;
@@ -125,6 +125,9 @@ app.post('/show', function (req, res) {
 });
 
 // -----------------------------------------------------------------------------
+app.get('/sayhello.js', function (req, res) {
+    res.send('Hello there from Node.');
+});
 app.get('/sayhello.php', function (req, res) {
     runPhpProgram('/docroot/sayhello.php', '', res);
 });
