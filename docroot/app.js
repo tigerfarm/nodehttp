@@ -13,10 +13,23 @@ function setActivityStatus(workerActivity) {
 }
 
 // -----------------------------------------------------------------------------
+
+function phpSayHello(workerActivity) {
+    logger("Run the PHP program: sayhello.php");
+    $.get("sayhello.php", function (theResponse) {
+        logger("The response: " + theResponse);
+    })
+            .fail(function () {
+                logger("- Error refreshing the token.");
+                return;
+            });
+}
+
+// -----------------------------------------------------------------------------
 // Sample Ajax call.
 function trToken() {
     clearMessages();
-    clientId = $("#clientid").val();
+    var clientId = $("#clientid").val();
     if (clientId === "") {
         $("div.msgClientid").html("<b>Required</b>");
         logger("- Required: Client id.");
@@ -30,8 +43,7 @@ function trToken() {
     }
     // Since, programs cannot make an Ajax call to a remote resource,
     // Need to do an Ajax call to a local program that goes and gets the token.
-    // logger("Refresh the TaskRouter token using client id: " + clientId + "&tokenPassword=" + tokenPassword);
-    logger("Refresh the TaskRouter token using client id: " + clientId);
+    logger("Refresh the token using client id: " + clientId);
     $("div.trMessages").html("Refreshing token, please wait.");
     $.get("generateTrToken.php?tokenPassword=" + tokenPassword + "&clientid=" + clientId, function (theResponse) {
         if (theResponse.startsWith('0')) {
@@ -42,13 +54,13 @@ function trToken() {
             $("div.trMessages").html("Missing client identity.");
             return;
         }
-        $("div.trMessages").html("TaskRouter token received.");
-        $("div.msgClientid").html("TaskRouter Token id: " + clientId);
+        $("div.trMessages").html("Token received.");
+        $("div.msgClientid").html("Token id: " + clientId);
         logger("The response: " + theResponse);
-        $("div.msgTokenPassword").html("TaskRouter Token refreshed");
+        $("div.msgTokenPassword").html("Token refreshed");
     })
             .fail(function () {
-                logger("- Error refreshing the TaskRouter token.");
+                logger("- Error refreshing the token.");
                 return;
             });
 }
@@ -61,6 +73,7 @@ function setTrButtons(workerActivity) {
         case "init":
             $('#btn-online').prop('disabled', true);
             $('#btn-offline').prop('disabled', true);
+            $('#btn-phpsayhello').prop('disabled', false);
             break;
         case "Available":
             $('#btn-online').prop('disabled', true);

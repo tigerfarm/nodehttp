@@ -18,6 +18,23 @@ const request = require('request');
 const url = require("url");
 
 // -----------------------------------------------------------------------------
+var path = require("path");
+
+function runPhpProgram(theProgramName, theParameters, response) {
+    console.log("+ Run: " + theProgramName + theParameters);
+    const theProgram = 'php ' + path.join(process.cwd(), theProgramName) + theParameters;
+    const exec = require('child_process').exec;
+    exec(theProgram, (error, stdout, stderr) => {
+        theResponse = `${stdout}`;
+        console.log('+ theResponse: ' + theResponse);
+        if (error !== null) {
+            console.log(`exec error: ${error}`);
+        }
+        response.send(theResponse);
+    });
+}
+
+// -----------------------------------------------------------------------------
 function runProgram(theCommand, response) {
     const exec = require('child_process').exec;
     exec(theCommand, (error, stdout, stderr) => {
@@ -108,6 +125,9 @@ app.post('/show', function (req, res) {
 });
 
 // -----------------------------------------------------------------------------
+app.get('/sayhello.php', function (req, res) {
+    runPhpProgram('/docroot/sayhello.php', '', res);
+});
 app.get('/ls', function (req, res) {
     runProgram('ls', res);
 });

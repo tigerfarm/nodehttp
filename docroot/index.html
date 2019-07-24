@@ -8,7 +8,12 @@
         <link rel="stylesheet" href="client.css">
         <script>
             function clearMessages() {
-                $("div.msgClientid").html("Token id: <b>" + clientId + "</b>");
+                var clientId = $("#clientid").val();
+                var msgClientidText = "";
+                if (clientId === "") {
+                    msgClientidText = "Token id: <b>" + clientId + "</b>";
+                }
+                $("div.msgClientid").html(msgClientidText);
                 $("div.msgTokenPassword").html("");
             }
             function logger(message) {
@@ -44,10 +49,11 @@
                         <td><button class="abutton" id="btn-trtoken" onclick="trToken();" style="visibility: visible;">Get access token</button></td>
                         <td><button class="abutton" id="btn-online" onclick="goAvailable();" disabled style="visibility: visible;">Go online</button></td>
                         <td><button class="abutton" id="btn-offline" onclick="goOffline();" disabled style="visibility: visible;">Go offline</button></td>
+                        <td><button class="abutton" id="btn-phpsayhello" onclick="phpSayHello();" disabled style="visibility: visible;">Run PHP program</button></td>
                     </tr>
                     <tr>
                         <td><div style="padding-top: 9px;">Worker status: </div></td>
-                        <td colspan="6"><div class="trStatus" style="padding-top: 9px;">Requires a TaskRouter token.</div></td>
+                        <td colspan="6"><div class="trStatus" style="padding-top: 9px;">Requires a token.</div></td>
                     </tr>
                 </table>
             </div>
