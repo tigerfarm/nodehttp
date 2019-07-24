@@ -137,6 +137,9 @@ app.get('/time', function (req, res) {
 app.get('/date', function (req, res) {
     runProgram('date', res);
 });
+app.get('/whereis', function (req, res) {
+    runProgram('whereis php', res);
+});
 
 // -----------------------------------------------------------------------------
 app.use(express.static('docroot'));
