@@ -27,9 +27,12 @@ heroku buildpacks:add --index 1 heroku/php
 heroku buildpacks:add --index 2 heroku/nodejs
 heroku buildpacks
 ````
----------------------
-+ GitHub repository requires the following in the top directory:
 
+The GitHub repository requires the following configuration files in the top directory.
++ composer.json : to have Heroku install the PHP buildpack.
++ Procfile : to tell the Heroku deployment process to run the Node program webserver: node webserver.js.
++ app.json : describe the application.
++ package.json : package information.
 ````
 $ cat composer.json
 {}
@@ -57,9 +60,10 @@ $ cat package.json
 ````
 git push heroku master
 ````
-+ Test. My Node program: webserver.js, is running and PHP is available.
++ Test. My Node program (webserver.js) is running and PHP is available.
+The application confirms this.
 
-+ Optional, log into the Heroku app and list the buildpacks.
++ Optionally, log into the Heroku app and list the buildpacks.
 ````
 $ heroku run /bin/bash
 Running /bin/bash on : tighttp... up, run.3791 (Free)
