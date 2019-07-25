@@ -29,10 +29,10 @@ heroku buildpacks
 ````
 
 For deployment to Heroku, the GitHub repository requires the following configuration files in the top directory.
-+ [composer.json]() : to have Heroku install the PHP buildpack.
-+ [Procfile]() : to tell the Heroku deployment process to run the Node program webserver: node webserver.js.
-+ [app.json]() : describe the application.
-+ [package.json]() : package information.
++ [composer.json](composer.json) : to have Heroku install the PHP buildpack.
++ [Procfile](Procfile) : to tell the Heroku deployment process to run the Node program webserver: node webserver.js.
++ [app.json](app.json) : describe the application.
++ [package.json](package.json) : package information.
 ````
 $ cat composer.json
 {}
