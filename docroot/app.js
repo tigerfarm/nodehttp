@@ -15,7 +15,7 @@ function setActivityStatus(workerActivity) {
 // -----------------------------------------------------------------------------
 
 function nodeSayHello() {
-    logger("Run the PHP program: sayhello.php");
+    logger("Run the Node program: sayhello.js");
     $.get("sayhello.js", function (theResponse) {
         logger("The response: " + theResponse);
     })
