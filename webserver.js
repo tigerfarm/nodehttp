@@ -22,7 +22,7 @@ var path = require("path");
 
 function runPhpProgram(theProgramName, theParameters, response) {
     console.log("+ Run: " + theProgramName + theParameters);
-    const theProgram = '/app/.heroku/php/bin/php ' + path.join(process.cwd(), theProgramName) + theParameters;
+    const theProgram = '/app/.heroku/php/bin/php ' + path.join(process.cwd(), theProgramName) + " " + theParameters;
     const exec = require('child_process').exec;
     exec(theProgram, (error, stdout, stderr) => {
         theResponse = `${stdout}`;
@@ -35,9 +35,10 @@ function runPhpProgram(theProgramName, theParameters, response) {
 }
 
 // -----------------------------------------------------------------------------
-function runProgram(theCommand, response) {
+function runProgram(theCommand, theParameters, response) {
     const exec = require('child_process').exec;
-    exec(theCommand, (error, stdout, stderr) => {
+    const theCommandWithParameters = theCommand + " " + theParameters;
+    exec(theCommandWithParameters, (error, stdout, stderr) => {
         theResponse = `${stdout}`;
         // console.log('+ theResponse: ');
         console.log(theResponse.substring(0, theResponse.length - 1));
@@ -52,7 +53,7 @@ function runProgram(theCommand, response) {
 // Echo the request.
 
 var theUrl = '';
-var theQueryJson = '';
+var theQueryString = '';
 app.get('*', function (request, res, next) {
     console.log("------------------");
     console.log("+ HTTP headers:");
@@ -68,12 +69,12 @@ app.get('*', function (request, res, next) {
     }
     console.log("---");
     theUrl = url.parse(request.url).pathname;
-    theQueryJson = url.parse(request.url).query;
-    var theQueryString = '';
-    if (theQueryJson !== null) {
-        theQueryString = " ? " + JSON.stringify(theQueryString);
+    theQueryString = url.parse(request.url).query;
+    theQueryStringJson = JSON.stringify(theQueryString);
+    if (theQueryStringJson !== null) {
+        theQueryString = theQueryStringJson;
     }
-    var urlComponentMessage = '+ URL components : ' + request.method + ' ' + theUrl + theQueryString;
+    var urlComponentMessage = '+ URL components : ' + request.method + ' ' + theUrl + " ? " + theQueryString;
     console.log(urlComponentMessage);
     next();
 });
@@ -131,17 +132,23 @@ app.get('/sayhello.js', function (req, res) {
 app.get('/sayhello.php', function (req, res) {
     runPhpProgram('/docroot/sayhello.php', '', res);
 });
+app.get('/echo.php', function (req, res) {
+    runPhpProgram('/docroot/echo.php', theQueryString, res);
+});
 app.get('/ls', function (req, res) {
-    runProgram('ls', res);
+    runProgram('ls', '', res);
+});
+app.get('/lsdocroot', function (req, res) {
+    runProgram('ls', 'docroot', res);
 });
 app.get('/time', function (req, res) {
-    runProgram('date', res);
+    runProgram('date', '', res);
 });
 app.get('/date', function (req, res) {
-    runProgram('date', res);
+    runProgram('date', '', res);
 });
 app.get('/whereis', function (req, res) {
-    runProgram('whereis php', res);
+    runProgram('whereis', 'php', res);
 });
 
 // -----------------------------------------------------------------------------
