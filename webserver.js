@@ -135,6 +135,9 @@ app.get('/sayhello.php', function (req, res) {
 app.get('/echo.php', function (req, res) {
     runPhpProgram('/docroot/echo.php', theQueryString, res);
 });
+app.post('/echo.php', function (req, res) {
+    runPhpProgram('/docroot/echo.php', JSON.stringify(req.body), res);
+});
 app.get('/ls', function (req, res) {
     runProgram('ls', '', res);
 });
